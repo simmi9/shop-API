@@ -29,6 +29,17 @@ app.post('/product', function(request, response) {
     });
 });
 
+app.get('/product', function(request, response) {
+
+    Product.find({},function(err, products) {
+        if (err) {
+            response.status(500).send({error: "Could not fetch products"});
+        } else {
+            response.send(products);
+        }
+    });
+});
+
 app.listen(3007, function() {
     console.log("Shop API running on port 3007...");
 });
