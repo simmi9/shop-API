@@ -40,6 +40,19 @@ app.get('/product', function(request, response) {
     });
 });
 
+app.post('/wishlist', function(request, response) {
+    var wishList = new WishList();
+    wishList.title = request.body.title;
+
+    wishList.save(function(err, newWishList) {
+       if (err) {
+           response.status(500).send({error: "Could not create wishlist"});
+       } else {
+           response.send(newWishList);
+       }
+    });
+});
+
 app.listen(3007, function() {
     console.log("Shop API running on port 3007...");
 });
